@@ -1,16 +1,28 @@
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import React, { useState } from 'react';
-import Camera from './Camera';
-import CameraTest from './CameraTest';
+import { Camera as CameraImport, CameraType } from 'expo-camera';
 
-const Home = () => {
+const Camera = () => {
+    const [type, setType] = useState(CameraType.back);
+    const [permission, requestPermission] = CameraImport.useCameraPermissions();
+
+    const onPressSendImage = async () => {
+        requestPermission();
+        console.log(permission);
+    };
+
     return (
         <View {...{ style: styles.mainContainer }}>
-            {/* <Camera /> */}
-            <CameraTest />
+            <CameraImport {...{ type }}></CameraImport>
+            <TouchableOpacity
+                {...{ style: styles.sendImage, onPress: onPressSendImage }}
+            >
+                <Text {...{ style: styles.buttonText }}>Send Image</Text>
+            </TouchableOpacity>
         </View>
     );
 };
+
 const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
@@ -32,4 +44,4 @@ const styles = StyleSheet.create({
         color: 'white',
     },
 });
-export default Home;
+export default Camera;
