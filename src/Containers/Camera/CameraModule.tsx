@@ -1,6 +1,7 @@
 import { Camera, CameraType } from 'expo-camera';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { SosButton, SOSText } from './CameraElements';
 
 export default function CameraModule() {
     const [type, setType] = useState(CameraType.back);
@@ -85,22 +86,9 @@ export default function CameraModule() {
                     </View>
                 </Camera>
             ) : (
-                <TouchableOpacity
-                    {...{
-                        onPress: () => setOpenCamera(true),
-                        style: styles.sosButton,
-                    }}
-                >
-                    <Text
-                        style={{
-                            color: '#fff',
-                            fontWeight: 'bold',
-                            textAlign: 'center',
-                        }}
-                    >
-                        Take picture
-                    </Text>
-                </TouchableOpacity>
+                <SosButton>
+                    <SOSText>SOS</SOSText>
+                </SosButton>
             )}
         </View>
     );

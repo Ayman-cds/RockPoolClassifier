@@ -1,12 +1,19 @@
 import { View, StyleSheet } from 'react-native';
 import React, { useState } from 'react';
 import CameraModule from '../Camera/CameraModule';
+import { ApuLogo, HomeMain } from './HomeElements';
+import APUlogo from '../../assets/APUlogo.png';
 
 const Home = () => {
     return (
-        <View {...{ style: styles.mainContainer }}>
+        <HomeMain
+            {...{
+                colors: ['#0e0571d0', '#0e05716d', '#0e0571d0'],
+            }}
+        >
+            <ApuLogo {...{ source: APUlogo }} />
             <CameraModule />
-        </View>
+        </HomeMain>
     );
 };
 const styles = StyleSheet.create({
@@ -17,6 +24,7 @@ const styles = StyleSheet.create({
         borderColor: 'black',
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: '#0E0571',
     },
     sendImage: {
         backgroundColor: 'grey',
