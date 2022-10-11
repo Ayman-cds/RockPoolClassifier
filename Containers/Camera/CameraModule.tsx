@@ -2,7 +2,7 @@ import { Camera, CameraType } from 'expo-camera';
 import { useState } from 'react';
 import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-export default function CameraTest() {
+export default function CameraModule() {
     const [type, setType] = useState(CameraType.back);
     const [permission, requestPermission] = Camera.useCameraPermissions();
     const [showPreview, setShowPreview] = useState(false);
@@ -36,15 +36,15 @@ export default function CameraTest() {
         if (!camera) return;
         const photo = await camera.takePictureAsync();
         setMostRecentPhoto(photo.uri);
-        console.log(photo);
+        setOpenCamera(false);
     };
     return (
         <View style={styles.container}>
-            {
+            {/* {
                 showPreview && (
                     
                 )
-            }
+            } */}
             {openCamera ? (
                 <Camera
                     style={styles.camera}
@@ -86,15 +86,9 @@ export default function CameraTest() {
                 </Camera>
             ) : (
                 <TouchableOpacity
-                    onPress={() => setOpenCamera(true)}
-                    style={{
-                        width: 130,
-                        borderRadius: 4,
-                        backgroundColor: '#14274e',
-                        flexDirection: 'row',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        height: 40,
+                    {...{
+                        onPress: () => setOpenCamera(true),
+                        style: styles.sosButton,
                     }}
                 >
                     <Text
@@ -117,6 +111,8 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '50%',
         justifyContent: 'center',
+        border: 10,
+        borderColor: 'black',
     },
     camera: {
         flex: 1,
@@ -139,5 +135,14 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: 'bold',
         color: 'white',
+    },
+    sosButton: {
+        width: 130,
+        borderRadius: 4,
+        backgroundColor: '#c70d03',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: 40,
     },
 });

@@ -1,13 +1,11 @@
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import React, { useState } from 'react';
-import Camera from './Camera';
-import CameraTest from './CameraTest';
+import CameraModule from '../Camera/CameraModule';
 
 const Home = () => {
     return (
         <View {...{ style: styles.mainContainer }}>
-            {/* <Camera /> */}
-            <CameraTest />
+            <CameraModule />
         </View>
     );
 };
