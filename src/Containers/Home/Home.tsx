@@ -1,17 +1,42 @@
 import { View, StyleSheet } from 'react-native';
 import React, { useState } from 'react';
 import CameraModule from '../Camera/CameraModule';
-import { ApuLogo, HomeMain } from './HomeElements';
+import { ApuLogo, HomeMain, Map, MapContainer } from './HomeElements';
 import APUlogo from '../../assets/APUlogo.png';
+import { Marker } from 'react-native-maps';
+import Drone from '../Drone/Drone';
 
 const Home = () => {
     return (
         <HomeMain
             {...{
-                colors: ['#0e0571d0', '#0e05716d', '#0e0571d0'],
+                colors: ['#0e0571fc', '#0e0571a4'],
             }}
         >
-            <ApuLogo {...{ source: APUlogo }} />
+            <ApuLogo />
+            <MapContainer>
+                <Map
+                    {...{
+                        style: { borderRadius: 20 },
+                        initialRegion: {
+                            latitude: 3.0554177828101743,
+                            longitude: 101.70051905834995,
+                            latitudeDelta: 0.13,
+                            longitudeDelta: 0.13,
+                        },
+                    }}
+                >
+                    <Marker
+                        {...{
+                            coordinate: {
+                                latitude: 3.0554177828101743,
+                                longitude: 101.70051905834995,
+                            },
+                        }}
+                    />
+                </Map>
+            </MapContainer>
+            <Drone />
             <CameraModule />
         </HomeMain>
     );

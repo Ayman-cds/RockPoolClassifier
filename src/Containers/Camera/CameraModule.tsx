@@ -97,7 +97,6 @@ export default function CameraModule() {
 const styles = StyleSheet.create({
     container: {
         width: '100%',
-        height: '50%',
         justifyContent: 'center',
         border: 10,
         borderColor: 'black',
