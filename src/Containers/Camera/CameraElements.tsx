@@ -1,8 +1,11 @@
-import { Text, TouchableOpacity } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import styled from 'styled-components';
 
+export const CameraModuleContainer = styled(View)`
+    width: 100%;
+`;
 export const SosButton = styled(TouchableOpacity)`
-    width: 80%;
+    width: 85%;
     border-radius: 10px;
     background-color: #c70d03;
     flex-direction: row;

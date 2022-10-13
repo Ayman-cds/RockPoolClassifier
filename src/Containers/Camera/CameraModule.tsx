@@ -26,26 +26,22 @@ export default function CameraModule() {
         );
     }
 
-    function toggleCameraType() {
+    const toggleCameraType = () => {
         setType((current) =>
             current === CameraType.back ? CameraType.front : CameraType.back
         );
-    }
+    };
     let camera: Camera;
 
     const takePicture = async () => {
         if (!camera) return;
         const photo = await camera.takePictureAsync();
+
         setMostRecentPhoto(photo.uri);
         setOpenCamera(false);
     };
     return (
         <View style={styles.container}>
-            {/* {
-                showPreview && (
-                    
-                )
-            } */}
             {openCamera ? (
                 <Camera
                     style={styles.camera}
@@ -86,7 +82,7 @@ export default function CameraModule() {
                     </View>
                 </Camera>
             ) : (
-                <SosButton>
+                <SosButton {...{ onPress: () => setOpenCamera(true) }}>
                     <SOSText>SOS</SOSText>
                 </SosButton>
             )}

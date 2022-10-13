@@ -1,12 +1,25 @@
 import { View, StyleSheet } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CameraModule from '../Camera/CameraModule';
 import { ApuLogo, HomeMain, Map, MapContainer } from './HomeElements';
 import APUlogo from '../../assets/APUlogo.png';
 import { Marker } from 'react-native-maps';
 import Drone from '../Drone/Drone';
+import { getFirestore, setDoc, doc } from 'firebase/firestore';
+import { db } from '../../../firebase-config';
 
 const Home = () => {
+    const fbTest = async () => {
+        await setDoc(doc(db, 'characters', 'mario'), {
+            employment: 'plumber',
+            outfitColor: 'red',
+            specialAttack: 'fireball',
+        });
+    };
+    useEffect(() => {
+        fbTest();
+    }, []);
+    
     return (
         <HomeMain
             {...{

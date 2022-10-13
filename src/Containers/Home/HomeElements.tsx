@@ -8,6 +8,7 @@ export const HomeMain = styled(LinearGradient)`
     display: flex;
     height: 100%;
     width: 100%;
+    justify-content: space-around;
     flex-direction: column;
 `;
 
