@@ -4,6 +4,7 @@ import Home from './src/Containers/Home/Home';
 import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import CameraModule from './src/Containers/Camera/CameraModule';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,6 +17,14 @@ export default function App() {
                         component: Home,
                         name: 'Home',
                         options: { title: 'Overview' },
+                    }}
+                />
+
+                <Stack.Screen
+                    {...{
+                        component: CameraModule,
+                        name: 'Camera',
+                        options: { title: 'Camera' },
                     }}
                 />
             </Stack.Navigator>

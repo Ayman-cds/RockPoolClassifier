@@ -1,12 +1,20 @@
 import { View, StyleSheet } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import CameraModule from '../Camera/CameraModule';
-import { ApuLogo, HomeMain, Map, MapContainer } from './HomeElements';
+import {
+    ApuLogo,
+    HomeMain,
+    Map,
+    MapContainer,
+    SosButton,
+    SOSText,
+} from './HomeElements';
 import APUlogo from '../../assets/APUlogo.png';
 import { Marker } from 'react-native-maps';
 import Drone from '../Drone/Drone';
 import { getFirestore, setDoc, doc } from 'firebase/firestore';
 import { db } from '../../../firebase-config';
+import { useNavigation } from '@react-navigation/native';
 
 const Home = () => {
     const fbTest = async () => {
@@ -19,7 +27,13 @@ const Home = () => {
     useEffect(() => {
         fbTest();
     }, []);
-    
+
+    const navigation = useNavigation();
+
+    const toggleCamera = () => {
+        navigation.navigate('Camera');
+    };
+
     return (
         <HomeMain
             {...{
@@ -50,7 +64,9 @@ const Home = () => {
                 </Map>
             </MapContainer>
             <Drone />
-            <CameraModule />
+            <SosButton {...{ onPress: toggleCamera }}>
+                <SOSText>SOS</SOSText>
+            </SosButton>
         </HomeMain>
     );
 };
