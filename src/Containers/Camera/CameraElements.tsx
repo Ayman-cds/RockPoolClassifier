@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import { Camera as CameraImport, CameraType } from 'expo-camera';
 
 export const CameraModuleContainer = styled(View)`
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     height: 100%;
 `;
@@ -10,7 +13,8 @@ export const CameraModuleContainer = styled(View)`
 export const Camera = styled(CameraImport)`
     display: flex;
     width: 100%;
-    height: 80%;
+    height: 90%;
+    border-radius: 10px;
 `;
 
 export const ViewFinder = styled(View)`
@@ -25,7 +29,6 @@ export const CaptureButtonContainer = styled(View)`
     display: flex;
     justify-content: center;
     width: 100%;
-    border: 1px solid black;
     align-self: center;
     align-items: center;
     margin-bottom: 30px;
@@ -35,8 +38,9 @@ export const CaptureButton = styled(TouchableOpacity)`
     height: 70px;
     bottom: 0;
     border-radius: 50px;
-    /* background-color: #fff; */
+    background-color: #fff;
 `;
+
 
 export const ImagePreview = styled(Image)`
     width: 100%;

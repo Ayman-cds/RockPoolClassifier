@@ -16,7 +16,7 @@ export default function App() {
                     {...{
                         component: Home,
                         name: 'Home',
-                        options: { title: 'Overview' },
+                        options: { title: 'Overview', headerShown: false },
                     }}
                 />
 
@@ -24,7 +24,7 @@ export default function App() {
                     {...{
                         component: CameraModule,
                         name: 'Camera',
-                        options: { title: 'Camera' },
+                        options: { headerShown: false },
                     }}
                 />
             </Stack.Navigator>

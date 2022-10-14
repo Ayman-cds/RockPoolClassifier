@@ -1,6 +1,6 @@
 import { Camera as ImportedCamera, CameraType } from 'expo-camera';
 import React, { useState } from 'react';
-import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Button, Text, View } from 'react-native';
 import {
     Camera,
     CameraModuleContainer,
@@ -9,13 +9,19 @@ import {
     ImagePreview,
     ViewFinder,
 } from './CameraElements';
+import { ref, uploadBytes } from 'firebase/storage';
+import { storage } from '../../../firebase-config';
+import {
+    SosRequest,
+    uploadNewSosRequest,
+} from '../../DatabaseInteractions/SosRequest';
 
 export default function CameraModule() {
     const [type, setType] = useState(CameraType.back);
     const [permission, requestPermission] = Camera.useCameraPermissions();
-    const [showPreview, setShowPreview] = useState(false);
-    const [mostRecentPhoto, setMostRecentPhoto] = useState();
-    const [openCamera, setOpenCamera] = useState(false);
+    const [mostRecentPhoto, setMostRecentPhoto] = useState<string | null>(null);
+    let camera: ImportedCamera | null;
+
     if (!permission) {
         // Camera permissions are still loading
         return <View />;
@@ -24,7 +30,7 @@ export default function CameraModule() {
     if (!permission.granted) {
         // Camera permissions are not granted yet
         return (
-            <View style={styles.container}>
+            <View>
                 <Text style={{ textAlign: 'center' }}>
                     We need your permission to show the camera
                 </Text>
@@ -33,20 +39,39 @@ export default function CameraModule() {
         );
     }
 
-    const toggleCameraType = () => {
-        setType((current) =>
-            current === CameraType.back ? CameraType.front : CameraType.back
-        );
-    };
-    let camera: ImportedCamera | null;
-
     const takePicture = async () => {
         if (!camera) return;
         const photo = await camera.takePictureAsync();
 
         setMostRecentPhoto(photo.uri);
         console.log(photo);
-        setOpenCamera(false);
+        uploadImage(photo.uri);
+    };
+
+    const getImageBlob = async (imageUrl: string) => {
+        const response = await fetch(imageUrl);
+        const blob = await response.blob();
+        return blob;
+    };
+    const uploadImage = async (photoUri: string) => {
+        let imageName = photoUri.substring(photoUri.lastIndexOf('/') + 1);
+        console.log(imageName);
+        const reference = ref(storage, imageName);
+        const imageBlob = await getImageBlob(photoUri);
+        try {
+            await uploadBytes(reference, imageBlob);
+            const request: SosRequest = {
+                location: {
+                    lat: 0,
+                    lng: 0,
+                },
+                imageUrl: reference.fullPath,
+                status: 'Pending',
+            };
+            await uploadNewSosRequest(request);
+        } catch (error) {
+            console.error(error);
+        }
     };
     return (
         <CameraModuleContainer>
@@ -55,6 +80,7 @@ export default function CameraModule() {
             ) : (
                 <Camera
                     {...{
+                        ratio: '16:9',
                         type,
                         ref: (r) => {
                             camera = r;
