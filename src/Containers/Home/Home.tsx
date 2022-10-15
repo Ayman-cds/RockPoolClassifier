@@ -40,7 +40,6 @@ const Home = () => {
                 colors: ['#000', '#050136e9', '#050136e9', '#050136e9', '#000'],
             }}
         >
-            <Drone />
             <MapContainer>
                 <Map
                     {...{
@@ -63,6 +62,7 @@ const Home = () => {
                     />
                 </Map>
             </MapContainer>
+            <Drone />
             <SosButton {...{ onPress: toggleCamera }}>
                 <SOSText>SOS</SOSText>
             </SosButton>

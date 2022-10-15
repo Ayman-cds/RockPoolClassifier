@@ -4,10 +4,10 @@ import Drone from '../../assets/Drone.png';
 export const DroneContainer = styled(View)`
     display: flex;
     flex-direction: column;
-    width: 85%;
-    height: 30%;
-    background-color: rgba(255, 255, 255, 0.25);
-    border-radius: 10px;
+    width: 100%;
+    /* height: 50%; */
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 30px;
     margin: 20px;
     align-self: center;
     align-items: center;
