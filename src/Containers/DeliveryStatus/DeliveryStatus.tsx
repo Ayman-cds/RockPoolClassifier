@@ -12,10 +12,37 @@ import {
     PackageWeight,
 } from './DeliveryStatusElements';
 import Drone from '../Drone/Drone';
+import { ProgressSteps, ProgressStep } from 'react-native-progress-steps';
 
 const DeliveryStatus = () => {
     return (
         <DeliveryContainer>
+            <View
+                {...{
+                    style: {
+                        height: 100,
+                    },
+                }}
+            >
+                <ProgressSteps>
+                    <ProgressStep
+                        label="Processing"
+                        {...{
+                            removeBtnRow: true,
+                        }}
+                    ></ProgressStep>
+
+                    <ProgressStep
+                        {...{
+                            nextBtnDisabled: true,
+                            removeBtnRow: true,
+                            previousBtnStyle: true,
+                        }}
+                        label="Pick Up"
+                    ></ProgressStep>
+                    <ProgressStep label="Delivered"></ProgressStep>
+                </ProgressSteps>
+            </View>
             <Drone
                 {...{
                     droneType: 'search',
