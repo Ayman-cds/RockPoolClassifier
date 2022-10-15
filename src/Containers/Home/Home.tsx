@@ -29,6 +29,17 @@ const Home = () => {
         getData();
     }, []);
 
+    const cancelRequest = async () => {
+        try {
+            await AsyncStorage.removeItem('currentSosRequest');
+            setActiveTaskId(null);
+            console.log('item removed ');
+        } catch (error) {
+            // saving error
+            console.error(error);
+        }
+    };
+
     return (
         <HomeMain
             {...{
@@ -57,7 +68,11 @@ const Home = () => {
                     />
                 </Map>
             </MapContainer>
-            {activeTaskId ? <DeliveryStatus /> : <StatusOverlay />}
+            {activeTaskId ? (
+                <DeliveryStatus {...{ cancelRequest }} />
+            ) : (
+                <StatusOverlay />
+            )}
         </HomeMain>
     );
 };

@@ -15,9 +15,13 @@ import {
 } from './DeliveryStatusElements';
 import Drone from '../Drone/Drone';
 import { ProgressSteps, ProgressStep } from 'react-native-progress-steps';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
 
-const DeliveryStatus = () => {
+const DeliveryStatus = ({ cancelRequest }: { cancelRequest: () => void }) => {
     const contactNum = '97455846615';
+    const navigation = useNavigation();
+
     return (
         <DeliveryContainer>
             <View
@@ -81,6 +85,7 @@ const DeliveryStatus = () => {
                             `http://api.whatsapp.com/send?phone=${contactNum}`
                         );
                     },
+                    onLongPress: cancelRequest,
                 }}
             >
                 <ContactUsButtonText>Contact Us</ContactUsButtonText>
