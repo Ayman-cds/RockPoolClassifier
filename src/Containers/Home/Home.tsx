@@ -15,6 +15,7 @@ import Drone from '../Drone/Drone';
 import { getFirestore, setDoc, doc } from 'firebase/firestore';
 import { db } from '../../../firebase-config';
 import { useNavigation } from '@react-navigation/native';
+import StatusOverlay from '../StatusOverlay/StatusOverlay';
 
 const Home = () => {
     const fbTest = async () => {
@@ -27,12 +28,6 @@ const Home = () => {
     useEffect(() => {
         fbTest();
     }, []);
-
-    const navigation = useNavigation();
-
-    const toggleCamera = () => {
-        navigation.navigate('Camera');
-    };
 
     return (
         <HomeMain
@@ -62,10 +57,7 @@ const Home = () => {
                     />
                 </Map>
             </MapContainer>
-            <Drone />
-            <SosButton {...{ onPress: toggleCamera }}>
-                <SOSText>SOS</SOSText>
-            </SosButton>
+            <StatusOverlay />
         </HomeMain>
     );
 };

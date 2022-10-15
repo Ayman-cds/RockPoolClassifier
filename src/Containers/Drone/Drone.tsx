@@ -16,19 +16,15 @@ const Drone = () => {
     const animation = useRef(null);
 
     return (
-        <DroneSection>
-            <LottieView
-                autoPlay={true}
-                ref={animation}
-                style={{
-                    width: 290,
-                    height: 290,
-                    alignSelf: 'center',
-                    opacity: 0.7,
-                }}
-                source={require('../../assets/droneFlying4.json')}
-            />
-        </DroneSection>
+        <LottieView
+            autoPlay={true}
+            ref={animation}
+            style={{
+                width: 180,
+                height: 180,
+            }}
+            source={require('../../assets/droneFlying4.json')}
+        />
     );
 };
 
