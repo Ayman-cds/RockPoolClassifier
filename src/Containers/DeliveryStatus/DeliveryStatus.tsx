@@ -1,6 +1,8 @@
 import { View, Text } from 'react-native';
 import React from 'react';
 import {
+    ContactUsButton,
+    ContactUsButtonText,
     DeliveryContainer,
     DeliveryDetails,
     DeliveryTypeName,
@@ -24,11 +26,11 @@ const DeliveryStatus = () => {
                     },
                 }}
             >
-                <ProgressSteps>
+                <ProgressSteps {...{ activeStep: 2 }}>
                     <ProgressStep
-                        label="Processing"
                         {...{
                             removeBtnRow: true,
+                            label: 'Processing',
                         }}
                     ></ProgressStep>
 
@@ -37,10 +39,17 @@ const DeliveryStatus = () => {
                             nextBtnDisabled: true,
                             removeBtnRow: true,
                             previousBtnStyle: true,
+                            label: 'Pick Up',
                         }}
-                        label="Pick Up"
                     ></ProgressStep>
-                    <ProgressStep label="Delivered"></ProgressStep>
+                    <ProgressStep
+                        {...{
+                            nextBtnDisabled: true,
+                            removeBtnRow: true,
+                            previousBtnStyle: true,
+                            label: 'Delivered',
+                        }}
+                    ></ProgressStep>
                 </ProgressSteps>
             </View>
             <Drone
@@ -64,6 +73,9 @@ const DeliveryStatus = () => {
                     <EtaText>5 mins</EtaText>
                 </EtaWrapper>
             </DeliveryDetails>
+            <ContactUsButton>
+                <ContactUsButtonText>Contact Us</ContactUsButtonText>
+            </ContactUsButton>
         </DeliveryContainer>
     );
 };

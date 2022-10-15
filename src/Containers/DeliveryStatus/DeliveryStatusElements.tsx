@@ -33,7 +33,8 @@ export const DeliveryContainer = styled(View)`
 
 export const DeliveryDetails = styled(View)`
     width: 100%;
-    height: 20%;
+    height: 10%;
+    margin-bottom: 5px;
     flex-direction: row;
 `;
 export const PackageDetailsWrapper = styled(View)`
@@ -76,4 +77,21 @@ export const EtaText = styled(Text)`
     color: green;
     font-family: Poppins-Medium;
     font-size: 18px;
+`;
+
+export const ContactUsButton = styled(View)`
+    background-color: green;
+    width: 85%;
+    height: 60px;
+    border-radius: 10px;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+`;
+
+export const ContactUsButtonText = styled(Text)`
+    font-size: 18px;
+    color: white;
 `;
