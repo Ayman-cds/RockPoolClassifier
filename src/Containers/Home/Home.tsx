@@ -37,10 +37,10 @@ const Home = () => {
     return (
         <HomeMain
             {...{
-                colors: ['#0e0571fc', '#0e0571a4'],
+                colors: ['#000', '#050136e9', '#050136e9', '#050136e9', '#000'],
             }}
         >
-            <ApuLogo />
+            <Drone />
             <MapContainer>
                 <Map
                     {...{
@@ -63,7 +63,6 @@ const Home = () => {
                     />
                 </Map>
             </MapContainer>
-            <Drone />
             <SosButton {...{ onPress: toggleCamera }}>
                 <SOSText>SOS</SOSText>
             </SosButton>
