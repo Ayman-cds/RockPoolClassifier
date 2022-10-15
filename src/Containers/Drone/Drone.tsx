@@ -11,21 +11,26 @@ import {
     SectionTitle,
 } from './DroneElements';
 import LottieView from 'lottie-react-native';
+import packageDrone from '../../assets/droneFlying4.json';
+import searchingDrone from '../../assets/droneFlying3.json';
 
-const Drone = () => {
+const Drone = ({ droneType }: { droneType: 'package' | 'search' }) => {
     const animation = useRef(null);
 
     return (
         <LottieView
-            autoPlay={true}
-            ref={animation}
-            style={{
-                width: 180,
-                height: 180,
+            {...{
+                autoPlay: true,
+                ref: animation,
+                style: {
+                    width: 180,
+                    height: 180,
+                },
+                source: droneType === 'package' ? packageDrone : searchingDrone,
             }}
-            source={require('../../assets/droneFlying4.json')}
         />
     );
 };
+
 
 export default Drone;

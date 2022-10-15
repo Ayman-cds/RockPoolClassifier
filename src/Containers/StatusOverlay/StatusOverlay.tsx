@@ -34,7 +34,7 @@ const StatusOverlay = () => {
                     </InfoWrapper>
                 </InfoContainer>
                 <DroneWrapper>
-                    <Drone />
+                    <Drone {...{ droneType: 'package' }} />
                 </DroneWrapper>
             </InfoAndDrone>
             <SosButton {...{ onPress: toggleCamera }}>
