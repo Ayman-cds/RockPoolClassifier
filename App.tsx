@@ -2,11 +2,10 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import Home from './src/Containers/Home/Home';
 import { NavigationContainer } from '@react-navigation/native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import CameraModule from './src/Containers/Camera/CameraModule';
 
-  
 const Stack = createNativeStackNavigator();
 import {
     useFonts,
@@ -38,6 +37,10 @@ export default function App() {
         'Poppins-Bold': Poppins_700Bold,
         'Poppins-Black': Poppins_900Black,
     });
+    useEffect(() => {
+        console.log('FONTS LOADED ====>>>>', fontsLoaded);
+    }, [fontsLoaded]);
+
     return (
         <NavigationContainer>
             <Stack.Navigator>

@@ -16,6 +16,7 @@ import { getFirestore, setDoc, doc } from 'firebase/firestore';
 import { db } from '../../../firebase-config';
 import { useNavigation } from '@react-navigation/native';
 import StatusOverlay from '../StatusOverlay/StatusOverlay';
+import DeliveryStatus from '../DeliveryStatus/DeliveryStatus';
 
 const Home = () => {
     const fbTest = async () => {
@@ -57,7 +58,8 @@ const Home = () => {
                     />
                 </Map>
             </MapContainer>
-            <StatusOverlay />
+            {/* <StatusOverlay /> */}
+            <DeliveryStatus />
         </HomeMain>
     );
 };

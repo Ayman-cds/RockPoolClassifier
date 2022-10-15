@@ -1,20 +1,16 @@
-import { View, Text } from 'react-native';
 import React, { useRef } from 'react';
-import {
-    DroneContainer,
-    DroneImage,
-    DroneInfo,
-    DroneInfoContainer,
-    DroneInfoTitle,
-    DroneSection,
-    InfoWrapper,
-    SectionTitle,
-} from './DroneElements';
 import LottieView from 'lottie-react-native';
 import packageDrone from '../../assets/droneFlying4.json';
 import searchingDrone from '../../assets/droneFlying3.json';
+import { ViewStyle } from 'react-native';
 
-const Drone = ({ droneType }: { droneType: 'package' | 'search' }) => {
+const Drone = ({
+    droneType,
+    style,
+}: {
+    droneType: 'package' | 'search';
+    style?: ViewStyle;
+}) => {
     const animation = useRef(null);
 
     return (
@@ -25,12 +21,12 @@ const Drone = ({ droneType }: { droneType: 'package' | 'search' }) => {
                 style: {
                     width: 180,
                     height: 180,
+                    ...style,
                 },
                 source: droneType === 'package' ? packageDrone : searchingDrone,
             }}
         />
     );
 };
-
 
 export default Drone;
