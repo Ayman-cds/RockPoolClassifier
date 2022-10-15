@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native';
+import { View, Text, Linking } from 'react-native';
 import React from 'react';
 import {
     ContactUsButton,
@@ -17,6 +17,7 @@ import Drone from '../Drone/Drone';
 import { ProgressSteps, ProgressStep } from 'react-native-progress-steps';
 
 const DeliveryStatus = () => {
+    const contactNum = '97455846615';
     return (
         <DeliveryContainer>
             <View
@@ -73,7 +74,15 @@ const DeliveryStatus = () => {
                     <EtaText>5 mins</EtaText>
                 </EtaWrapper>
             </DeliveryDetails>
-            <ContactUsButton>
+            <ContactUsButton
+                {...{
+                    onPress: () => {
+                        Linking.openURL(
+                            `http://api.whatsapp.com/send?phone=${contactNum}`
+                        );
+                    },
+                }}
+            >
                 <ContactUsButtonText>Contact Us</ContactUsButtonText>
             </ContactUsButton>
         </DeliveryContainer>

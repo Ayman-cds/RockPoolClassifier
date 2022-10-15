@@ -1,4 +1,4 @@
-import { Text, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import styled from 'styled-components';
 import { COLORS } from '../../styles/Colors';
 
@@ -33,6 +33,8 @@ export const DeliveryContainer = styled(View)`
 
 export const DeliveryDetails = styled(View)`
     width: 100%;
+    /* border: 1px solid black; */
+    justify-content: space-around;
     height: 10%;
     margin-bottom: 5px;
     flex-direction: row;
@@ -79,7 +81,7 @@ export const EtaText = styled(Text)`
     font-size: 18px;
 `;
 
-export const ContactUsButton = styled(View)`
+export const ContactUsButton = styled(TouchableOpacity)`
     background-color: green;
     width: 85%;
     height: 60px;

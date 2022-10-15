@@ -66,7 +66,7 @@ export default function CameraModule() {
                     lng: 0,
                 },
                 imageUrl: reference.fullPath,
-                status: 'Pending',
+                status: 'Processing',
             };
             await uploadNewSosRequest(request);
         } catch (error) {

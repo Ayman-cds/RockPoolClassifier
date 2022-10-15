@@ -1,33 +1,32 @@
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import CameraModule from '../Camera/CameraModule';
-import {
-    ApuLogo,
-    HomeMain,
-    Map,
-    MapContainer,
-    SosButton,
-    SOSText,
-} from './HomeElements';
-import APUlogo from '../../assets/APUlogo.png';
+import { HomeMain, Map, MapContainer } from './HomeElements';
 import { Marker } from 'react-native-maps';
-import Drone from '../Drone/Drone';
-import { getFirestore, setDoc, doc } from 'firebase/firestore';
+import { setDoc, doc } from 'firebase/firestore';
 import { db } from '../../../firebase-config';
-import { useNavigation } from '@react-navigation/native';
 import StatusOverlay from '../StatusOverlay/StatusOverlay';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import DeliveryStatus from '../DeliveryStatus/DeliveryStatus';
 
 const Home = () => {
-    const fbTest = async () => {
-        await setDoc(doc(db, 'characters', 'mario'), {
-            employment: 'plumber',
-            outfitColor: 'red',
-            specialAttack: 'fireball',
-        });
+    const [activeTaskId, setActiveTaskId] = useState<null | string>(null);
+
+    const getData = async () => {
+        try {
+            const value = await AsyncStorage.getItem('currentSosRequest');
+            if (value !== null) {
+                // value previously stored
+                setActiveTaskId(value);
+                console.log('currentTaskId', value);
+            }
+        } catch (error) {
+            console.error(error);
+            // error reading value
+        }
     };
+
     useEffect(() => {
-        fbTest();
+        getData();
     }, []);
 
     return (
@@ -58,8 +57,7 @@ const Home = () => {
                     />
                 </Map>
             </MapContainer>
-            {/* <StatusOverlay /> */}
-            <DeliveryStatus />
+            {activeTaskId ? <DeliveryStatus /> : <StatusOverlay />}
         </HomeMain>
     );
 };
