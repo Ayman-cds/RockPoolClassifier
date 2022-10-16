@@ -28,6 +28,8 @@ import {
     Poppins_900Black,
     Poppins_900Black_Italic,
 } from '@expo-google-fonts/poppins';
+import RequestProcessed from './src/Containers/RequestProcessed/RequestProcessed';
+
 export default function App() {
     let [fontsLoaded] = useFonts({
         'Poppins-Light': Poppins_300Light,
@@ -56,6 +58,13 @@ export default function App() {
                     {...{
                         component: CameraModule,
                         name: 'Camera',
+                        options: { headerShown: false },
+                    }}
+                />
+                <Stack.Screen
+                    {...{
+                        component: RequestProcessed,
+                        name: 'ResponsePage',
                         options: { headerShown: false },
                     }}
                 />

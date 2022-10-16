@@ -7,6 +7,7 @@ import { db } from '../../../firebase-config';
 import StatusOverlay from '../StatusOverlay/StatusOverlay';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DeliveryStatus from '../DeliveryStatus/DeliveryStatus';
+import { useIsFocused } from '@react-navigation/native';
 
 const Home = () => {
     const [activeTaskId, setActiveTaskId] = useState<null | string>(null);
@@ -24,10 +25,11 @@ const Home = () => {
             // error reading value
         }
     };
+    const isFocused = useIsFocused();
 
     useEffect(() => {
         getData();
-    }, []);
+    }, [isFocused]);
 
     const cancelRequest = async () => {
         try {

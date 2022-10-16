@@ -1,12 +1,13 @@
 import { Camera as ImportedCamera, CameraType } from 'expo-camera';
-import React, { useState } from 'react';
-import { Button, Text, View } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import { ActivityIndicator, Button, Text, View } from 'react-native';
 import {
     Camera,
     CameraModuleContainer,
     CaptureButton,
     CaptureButtonContainer,
     ImagePreview,
+    ImagePreviewContainer,
     ViewFinder,
 } from './CameraElements';
 import { ref, uploadBytes } from 'firebase/storage';
@@ -15,13 +16,19 @@ import {
     SosRequest,
     uploadNewSosRequest,
 } from '../../DatabaseInteractions/SosRequest';
+import { useNavigation } from '@react-navigation/native';
+import LottieView from 'lottie-react-native';
+import loadingAnimation from '../../assets/loading.json';
 
 export default function CameraModule() {
     const [type, setType] = useState(CameraType.back);
     const [permission, requestPermission] = Camera.useCameraPermissions();
     const [mostRecentPhoto, setMostRecentPhoto] = useState<string | null>(null);
+    const [exit, setExit] = useState<boolean>(false);
+    const navigation = useNavigation();
     let camera: ImportedCamera | null;
-
+    const [loading, setLoading] = useState<boolean>(false);
+    const animation = useRef(null);
     if (!permission) {
         // Camera permissions are still loading
         return <View />;
@@ -41,11 +48,13 @@ export default function CameraModule() {
 
     const takePicture = async () => {
         if (!camera) return;
+        setLoading(true);
         const photo = await camera.takePictureAsync();
 
         setMostRecentPhoto(photo.uri);
         console.log(photo);
         uploadImage(photo.uri);
+        setLoading(false);
     };
 
     const getImageBlob = async (imageUrl: string) => {
@@ -69,14 +78,22 @@ export default function CameraModule() {
                 status: 'Processing',
             };
             await uploadNewSosRequest(request);
+            setExit(true);
+            navigation.navigate('ResponsePage');
         } catch (error) {
             console.error(error);
         }
     };
+
     return (
         <CameraModuleContainer>
             {mostRecentPhoto ? (
-                <ImagePreview {...{ source: { uri: mostRecentPhoto } }} />
+                <ImagePreviewContainer>
+                    <ImagePreview {...{ source: { uri: mostRecentPhoto } }} />
+                    <ActivityIndicator
+                        {...{ size: 'large', style: { marginTop: 40 } }}
+                    />
+                </ImagePreviewContainer>
             ) : (
                 <Camera
                     {...{

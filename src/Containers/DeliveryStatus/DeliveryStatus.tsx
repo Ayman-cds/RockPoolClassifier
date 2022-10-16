@@ -31,7 +31,7 @@ const DeliveryStatus = ({ cancelRequest }: { cancelRequest: () => void }) => {
                     },
                 }}
             >
-                <ProgressSteps {...{ activeStep: 2 }}>
+                <ProgressSteps {...{ activeStep: 0 }}>
                     <ProgressStep
                         {...{
                             removeBtnRow: true,
