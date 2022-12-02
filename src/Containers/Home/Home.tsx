@@ -53,8 +53,8 @@ const Home = () => {
                     {...{
                         style: { borderRadius: 20 },
                         initialRegion: {
-                            latitude: 3.0554177828101743,
-                            longitude: 101.70051905834995,
+                            latitude: 5.395866,
+                            longitude: 100.328082,
                             latitudeDelta: 0.13,
                             longitudeDelta: 0.13,
                         },
@@ -63,18 +63,32 @@ const Home = () => {
                     <Marker
                         {...{
                             coordinate: {
-                                latitude: 3.0554177828101743,
-                                longitude: 101.70051905834995,
+                                latitude: 5.395866,
+                                longitude: 100.328082,
+                            },
+                        }}
+                    />
+
+                    <Marker
+                        {...{
+                            coordinate: {
+                                latitude: 5.458444,
+                                longitude: 100.313829,
+                            },
+                        }}
+                    />
+
+                    <Marker
+                        {...{
+                            coordinate: {
+                                latitude: 5.423673,
+                                longitude: 100.336011,
                             },
                         }}
                     />
                 </Map>
             </MapContainer>
-            {activeTaskId ? (
-                <DeliveryStatus {...{ cancelRequest }} />
-            ) : (
-                <StatusOverlay />
-            )}
+            <StatusOverlay />
         </HomeMain>
     );
 };

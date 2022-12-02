@@ -59,10 +59,10 @@ export const Info = styled(Text)`
 export const DroneWrapper = styled(View)`
     width: 40%;
 `;
-export const SosButton = styled(TouchableOpacity)`
+export const CaptureButton = styled(TouchableOpacity)`
     width: 85%;
     border-radius: 10px;
-    background-color: #c70d03;
+    background-color: green;
     flex-direction: row;
     justify-content: center;
     align-items: center;

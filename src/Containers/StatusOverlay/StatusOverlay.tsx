@@ -6,7 +6,7 @@ import {
     InfoAndDrone,
     InfoContainer,
     InfoWrapper,
-    SosButton,
+    CaptureButton,
     SOSText,
     StatusContainer,
     StatusTitle,
@@ -24,22 +24,22 @@ const StatusOverlay = () => {
         <StatusContainer>
             <InfoAndDrone>
                 <InfoContainer>
-                    <StatusTitle>No Active Requests</StatusTitle>
+                    <StatusTitle>Benthic Marine organisms near you</StatusTitle>
                     <InfoWrapper>
                         <Info {...{ style: { color: 'green' } }}>
-                            Drone status: Ready
+                            Straits Quay Penang: 40,000 organisms
                         </Info>
-                        <Info>Location: Ready</Info>
-                        <Info>Weather: Stable</Info>
+                        <Info>E&O Hotel: 40,000 organisms</Info>
+                        <Info>Karpal Singh Drive: 60,000 organisms</Info>
                     </InfoWrapper>
                 </InfoContainer>
                 <DroneWrapper>
                     <Drone {...{ droneType: 'package' }} />
                 </DroneWrapper>
             </InfoAndDrone>
-            <SosButton {...{ onPress: toggleCamera }}>
-                <SOSText>SOS</SOSText>
-            </SosButton>
+            <CaptureButton {...{ onPress: toggleCamera }}>
+                <SOSText>Capture</SOSText>
+            </CaptureButton>
         </StatusContainer>
     );
 };

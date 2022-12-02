@@ -1,13 +1,12 @@
 import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
 import { db } from '../../firebase-config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-export interface SosRequest {
+export interface imageUpload {
     location: {
         lat: number;
         lng: number;
     };
     imageUrl: string;
-    status: 'Processing' | 'PickedUp' | 'Delivered';
 }
 const storeData = async (currentRequestId: string) => {
     try {
@@ -19,9 +18,9 @@ const storeData = async (currentRequestId: string) => {
     }
 };
 
-export const uploadNewSosRequest = async (req: SosRequest) => {
+export const uploadNewImage = async (req: imageUpload) => {
     try {
-        const response = await addDoc(collection(db, 'SosRequest'), req);
+        const response = await addDoc(collection(db, 'RockPool'), req);
         console.log('request uploaded, response ==>>', response.id);
         storeData(response.id);
     } catch (error) {

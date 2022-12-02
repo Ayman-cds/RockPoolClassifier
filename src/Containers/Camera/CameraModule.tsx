@@ -10,15 +10,36 @@ import {
     ImagePreviewContainer,
     ViewFinder,
 } from './CameraElements';
-import { ref, uploadBytes } from 'firebase/storage';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { storage } from '../../../firebase-config';
 import {
-    SosRequest,
-    uploadNewSosRequest,
-} from '../../DatabaseInteractions/SosRequest';
+    imageUpload,
+    uploadNewImage,
+} from '../../DatabaseInteractions/ClassificationRequest';
 import { useNavigation } from '@react-navigation/native';
 import LottieView from 'lottie-react-native';
 import loadingAnimation from '../../assets/loading.json';
+
+interface RockPool {
+    id: string;
+    name: string;
+    organisms: string[];
+    coverage: number;
+    location: {
+        lat: number;
+        lng: number;
+    };
+    image: string;
+    classifiedImage: string | null;
+}
+interface RockPoolAddition {
+    id: string;
+    rockPoolId: string;
+    newOrganisms: string[];
+    date: number;
+    image: string;
+    classifiedImage: string | null;
+}
 
 export default function CameraModule() {
     const [type, setType] = useState(CameraType.back);
@@ -29,22 +50,27 @@ export default function CameraModule() {
     let camera: ImportedCamera | null;
     const [loading, setLoading] = useState<boolean>(false);
     const animation = useRef(null);
-    if (!permission) {
-        // Camera permissions are still loading
-        return <View />;
-    }
+    useEffect(() => {
+        if (!permission) {
+            // Camera permissions are still loading
+            return <View />;
+        }
 
-    if (!permission.granted) {
-        // Camera permissions are not granted yet
-        return (
-            <View>
-                <Text style={{ textAlign: 'center' }}>
-                    We need your permission to show the camera
-                </Text>
-                <Button onPress={requestPermission} title="grant permission" />
-            </View>
-        );
-    }
+        if (!permission.granted) {
+            // Camera permissions are not granted yet
+            return (
+                <View>
+                    <Text style={{ textAlign: 'center' }}>
+                        We need your permission to show the camera
+                    </Text>
+                    <Button
+                        onPress={requestPermission}
+                        title="grant permission"
+                    />
+                </View>
+            );
+        }
+    }, []);
 
     const takePicture = async () => {
         if (!camera) return;
@@ -69,15 +95,17 @@ export default function CameraModule() {
         const imageBlob = await getImageBlob(photoUri);
         try {
             await uploadBytes(reference, imageBlob);
-            const request: SosRequest = {
+            const downloadURL = await getDownloadURL(reference);
+            const request: imageUpload = {
                 location: {
                     lat: 0,
                     lng: 0,
                 },
-                imageUrl: reference.fullPath,
+                imageUrl: downloadURL,
                 status: 'Processing',
             };
-            await uploadNewSosRequest(request);
+            console.log(downloadURL);
+            await uploadNewImage(request);
             setExit(true);
             navigation.navigate('ResponsePage');
         } catch (error) {
