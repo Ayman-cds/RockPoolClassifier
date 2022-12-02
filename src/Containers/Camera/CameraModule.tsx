@@ -24,7 +24,11 @@ import { NavType } from '../../../App';
 
 export interface RockPool {
     name: string;
-    organisms: string[];
+    organisms: {
+        barnacles: null | number;
+        oysters: null | number;
+        algae: null | number;
+    } | null;
     coverage: number | null;
     location: {
         lat: number;
@@ -36,7 +40,11 @@ export interface RockPool {
 }
 export interface RockPoolAddition {
     rockPoolId: string;
-    newOrganisms: string[];
+    organisms: {
+        barnacles: null | number;
+        oysters: null | number;
+        algae: null | number;
+    } | null;
     date: Date;
     image: string;
     classifiedImage: string | null;
@@ -120,7 +128,7 @@ export default function CameraModule() {
                 coverage: null,
                 name: rockPoolName,
                 status: 'unclassified',
-                organisms: [],
+                organisms: null,
             };
             console.log(downloadURL);
             const newId = await uploadNewRockPool(request);
@@ -150,7 +158,7 @@ export default function CameraModule() {
             const downloadURL = await getDownloadURL(reference);
             const request: RockPoolAddition = {
                 rockPoolId,
-                newOrganisms: [],
+                organisms: null,
                 date: new Date(),
                 image: downloadURL,
                 classifiedImage: null,

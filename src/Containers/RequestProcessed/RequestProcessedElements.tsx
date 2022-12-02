@@ -13,7 +13,6 @@ export const Container = styled(View)`
 export const ResponseTitle = styled(Text)`
     font-size: 18px;
     text-align: center;
-    color: ${COLORS.GREY};
     width: 80%;
 `;
 
@@ -29,8 +28,8 @@ export const ClassificationContainer = styled(Card)`
 export const Shadow = styled(View)``;
 export const ClassificationTitle = styled(Text)`
     font-size: 24px;
-    font-weight: bold;
     text-align: center;
+    color: #5d5c5c;
     margin: 15px 0;
 `;
 
@@ -49,7 +48,7 @@ export const MiddleTextWrapper = styled(View)`
     width: 100%;
 `;
 export const MiddleText = styled(Text)`
-    font-size: 20px;
+    font-size: 15px;
     padding: 10px;
     width: 45%;
     text-align: center;
@@ -67,6 +66,7 @@ export const BottomText = styled(Text)`
 `;
 export const CoverageText = styled(Text)`
     font-size: 20px;
+    color: #5d5c5c;
     font-weight: bold;
     text-align: center;
 `;
