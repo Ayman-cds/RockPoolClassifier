@@ -70,7 +70,7 @@ export const CaptureButton = styled(TouchableOpacity)`
     align-self: center;
 `;
 
-export const SOSText = styled(Text)`
+export const ButtonText = styled(Text)`
     color: #fff;
     font-weight: bold;
     text-align: center;

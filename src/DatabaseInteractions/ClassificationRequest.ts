@@ -1,6 +1,7 @@
 import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
 import { db } from '../../firebase-config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { RockPool, RockPoolAddition } from '../Containers/Camera/CameraModule';
 export interface imageUpload {
     location: {
         lat: number;
@@ -18,9 +19,19 @@ const storeData = async (currentRequestId: string) => {
     }
 };
 
-export const uploadNewImage = async (req: imageUpload) => {
+export const uploadNewRockPool = async (req: RockPool) => {
     try {
         const response = await addDoc(collection(db, 'RockPool'), req);
+        console.log('request uploaded, response ==>>', response.id);
+        storeData(response.id);
+    } catch (error) {
+        console.error('Error while uploading Request');
+    }
+};
+
+export const uploadNewRockPoolUpdate = async (req: RockPoolAddition) => {
+    try {
+        const response = await addDoc(collection(db, 'RockPoolAddition'), req);
         console.log('request uploaded, response ==>>', response.id);
         storeData(response.id);
     } catch (error) {

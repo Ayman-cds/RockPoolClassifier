@@ -7,7 +7,7 @@ import {
     InfoContainer,
     InfoWrapper,
     CaptureButton,
-    SOSText,
+    ButtonText,
     StatusContainer,
     StatusTitle,
 } from './StatusOverlayElements';
@@ -38,7 +38,7 @@ const StatusOverlay = () => {
                 </DroneWrapper>
             </InfoAndDrone>
             <CaptureButton {...{ onPress: toggleCamera }}>
-                <SOSText>Capture</SOSText>
+                <ButtonText>Capture</ButtonText>
             </CaptureButton>
         </StatusContainer>
     );

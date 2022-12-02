@@ -1,12 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import Home from './src/Containers/Home/Home';
+import NewRockPool from './src/Containers/NewRockPool/NewRockPool';
+import RockPoolAddition from './src/Containers/RockPoolAddition/RockPoolAddition';
 import { NavigationContainer } from '@react-navigation/native';
 import React, { useEffect } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import CameraModule from './src/Containers/Camera/CameraModule';
 
-const Stack = createNativeStackNavigator();
 import {
     useFonts,
     Poppins_100Thin,
@@ -30,6 +31,21 @@ import {
 } from '@expo-google-fonts/poppins';
 import RequestProcessed from './src/Containers/RequestProcessed/RequestProcessed';
 
+export type RootStackParamList = {
+    Home: undefined;
+    NewRockPool: undefined;
+    RockPoolAddition: undefined;
+    ResponsePage: undefined;
+    Camera: {
+        additionType: 'newRockPool' | 'rockPoolUpdate';
+        rockPoolId: string;
+        rockPoolName: string;
+    };
+};
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
+//export type NavType = StackNavigationProp<RootStackParamList>;
+
 export default function App() {
     let [fontsLoaded] = useFonts({
         'Poppins-Light': Poppins_300Light,
@@ -48,12 +64,26 @@ export default function App() {
             <Stack.Navigator>
                 <Stack.Screen
                     {...{
+                        component: RockPoolAddition,
+                        name: 'RockPoolAddition',
+                        options: { title: 'Overview', headerShown: false },
+                    }}
+                />
+                <Stack.Screen
+                    {...{
+                        component: NewRockPool,
+                        name: 'NewRockPool',
+                        options: { title: 'Overview', headerShown: false },
+                    }}
+                />
+
+                <Stack.Screen
+                    {...{
                         component: Home,
                         name: 'Home',
                         options: { title: 'Overview', headerShown: false },
                     }}
                 />
-
                 <Stack.Screen
                     {...{
                         component: CameraModule,
