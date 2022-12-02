@@ -5,7 +5,10 @@ import NewRockPool from './src/Containers/NewRockPool/NewRockPool';
 import RockPoolAddition from './src/Containers/RockPoolAddition/RockPoolAddition';
 import { NavigationContainer } from '@react-navigation/native';
 import React, { useEffect } from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {
+    createStackNavigator,
+    StackNavigationProp,
+} from '@react-navigation/stack';
 import CameraModule from './src/Containers/Camera/CameraModule';
 
 import {
@@ -35,16 +38,19 @@ export type RootStackParamList = {
     Home: undefined;
     NewRockPool: undefined;
     RockPoolAddition: undefined;
-    ResponsePage: undefined;
+    ResponsePage: {
+        updateId: string;
+        type: 'newPool' | 'newPoolUpdate';
+    };
     Camera: {
         additionType: 'newRockPool' | 'rockPoolUpdate';
-        rockPoolId: string;
-        rockPoolName: string;
+        rockPoolId: string | null;
+        rockPoolName: string | null;
     };
 };
 
-const Stack = createNativeStackNavigator<RootStackParamList>();
-//export type NavType = StackNavigationProp<RootStackParamList>;
+const Stack = createStackNavigator<RootStackParamList>();
+export type NavType = StackNavigationProp<RootStackParamList>;
 
 export default function App() {
     let [fontsLoaded] = useFonts({
@@ -64,6 +70,20 @@ export default function App() {
             <Stack.Navigator>
                 <Stack.Screen
                     {...{
+                        component: RequestProcessed,
+                        name: 'ResponsePage',
+                        options: { headerShown: false },
+                    }}
+                />
+                <Stack.Screen
+                    {...{
+                        component: Home,
+                        name: 'Home',
+                        options: { title: 'Overview', headerShown: false },
+                    }}
+                />
+                <Stack.Screen
+                    {...{
                         component: RockPoolAddition,
                         name: 'RockPoolAddition',
                         options: { title: 'Overview', headerShown: false },
@@ -79,22 +99,8 @@ export default function App() {
 
                 <Stack.Screen
                     {...{
-                        component: Home,
-                        name: 'Home',
-                        options: { title: 'Overview', headerShown: false },
-                    }}
-                />
-                <Stack.Screen
-                    {...{
                         component: CameraModule,
                         name: 'Camera',
-                        options: { headerShown: false },
-                    }}
-                />
-                <Stack.Screen
-                    {...{
-                        component: RequestProcessed,
-                        name: 'ResponsePage',
                         options: { headerShown: false },
                     }}
                 />

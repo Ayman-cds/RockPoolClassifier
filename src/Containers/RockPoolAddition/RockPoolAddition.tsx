@@ -15,9 +15,10 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../../firebase-config';
+import { NavType } from '../../../App';
 
 const RockPoolAddition = () => {
-    const navigation = useNavigation();
+    const navigation = useNavigation<NavType>();
     const toggleCamera = () => {
         navigation.navigate('Camera', {
             additionType: 'rockPoolUpdate',
@@ -76,7 +77,13 @@ const RockPoolAddition = () => {
                     },
                 }}
             />
-            <CaptureButton {...{ onPress: toggleCamera }}>
+            <CaptureButton
+                {...{
+                    onPress: toggleCamera,
+                    disabled: value == null,
+                    style: { opacity: value == null ? 0.5 : 1 },
+                }}
+            >
                 <ButtonText>Add Image</ButtonText>
             </CaptureButton>
         </NewRockPoolContainer>

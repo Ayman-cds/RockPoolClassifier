@@ -70,6 +70,32 @@ export const CaptureButton = styled(TouchableOpacity)`
     align-self: center;
 `;
 
+export const CaptureButtonWrapper = styled(View)`
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+`;
+export const NewPoolBtn = styled(TouchableOpacity)`
+    width: 45%;
+    border-radius: 10px;
+    background-color: #a16900;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 55px;
+    align-self: center;
+`;
+
+export const UpdatePoolBtn = styled(TouchableOpacity)`
+    width: 45%;
+    border-radius: 10px;
+    background-color: green;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 55px;
+    align-self: center;
+`;
 export const ButtonText = styled(Text)`
     color: #fff;
     font-weight: bold;

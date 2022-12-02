@@ -10,9 +10,10 @@ import {
     CaptureButton,
 } from '../StatusOverlay/StatusOverlayElements';
 import { useNavigation } from '@react-navigation/native';
+import { NavType } from '../../../App';
 
 const NewRockPool = () => {
-    const navigation = useNavigation();
+    const navigation = useNavigation<NavType>();
     const [name, setName] = useState<string>('');
     const toggleCamera = () => {
         navigation.navigate('Camera', {
@@ -31,7 +32,14 @@ const NewRockPool = () => {
                     onChangeText: (text: string) => setName(text),
                 }}
             />
-            <CaptureButton {...{ onPress: toggleCamera }}>
+            <CaptureButton
+                {...{
+                    onPress: toggleCamera,
+
+                    disabled: name == '',
+                    style: { opacity: name == '' ? 0.5 : 1 },
+                }}
+            >
                 <ButtonText>Add Image</ButtonText>
             </CaptureButton>
         </NewRockPoolContainer>

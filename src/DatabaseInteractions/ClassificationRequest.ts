@@ -23,7 +23,7 @@ export const uploadNewRockPool = async (req: RockPool) => {
     try {
         const response = await addDoc(collection(db, 'RockPool'), req);
         console.log('request uploaded, response ==>>', response.id);
-        storeData(response.id);
+        return response.id;
     } catch (error) {
         console.error('Error while uploading Request');
     }
@@ -33,7 +33,7 @@ export const uploadNewRockPoolUpdate = async (req: RockPoolAddition) => {
     try {
         const response = await addDoc(collection(db, 'RockPoolAddition'), req);
         console.log('request uploaded, response ==>>', response.id);
-        storeData(response.id);
+        return response.id;
     } catch (error) {
         console.error('Error while uploading Request');
     }

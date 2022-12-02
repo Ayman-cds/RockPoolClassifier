@@ -10,16 +10,17 @@ import {
     ButtonText,
     StatusContainer,
     StatusTitle,
+    CaptureButtonWrapper,
+    NewPoolBtn,
+    UpdatePoolBtn,
 } from './StatusOverlayElements';
 import Drone from '../Drone/Drone';
 import { useNavigation } from '@react-navigation/native';
+import { NavType } from '../../../App';
 
 const StatusOverlay = () => {
-    const navigation = useNavigation();
+    const navigation = useNavigation<NavType>();
 
-    const toggleCamera = () => {
-        navigation.navigate('Camera');
-    };
     return (
         <StatusContainer>
             <InfoAndDrone>
@@ -37,9 +38,21 @@ const StatusOverlay = () => {
                     <Drone {...{ droneType: 'package' }} />
                 </DroneWrapper>
             </InfoAndDrone>
-            <CaptureButton {...{ onPress: toggleCamera }}>
-                <ButtonText>Capture</ButtonText>
-            </CaptureButton>
+            <CaptureButtonWrapper>
+                <NewPoolBtn
+                    {...{ onPress: () => navigation.navigate('NewRockPool') }}
+                >
+                    <ButtonText>New Pool</ButtonText>
+                </NewPoolBtn>
+
+                <UpdatePoolBtn
+                    {...{
+                        onPress: () => navigation.navigate('RockPoolAddition'),
+                    }}
+                >
+                    <ButtonText>Update Pool</ButtonText>
+                </UpdatePoolBtn>
+            </CaptureButtonWrapper>
         </StatusContainer>
     );
 };

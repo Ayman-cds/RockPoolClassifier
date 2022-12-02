@@ -20,6 +20,7 @@ import {
 import { useNavigation, useRoute } from '@react-navigation/native';
 import LottieView from 'lottie-react-native';
 import loadingAnimation from '../../assets/loading.json';
+import { NavType } from '../../../App';
 
 export interface RockPool {
     name: string;
@@ -54,7 +55,7 @@ export default function CameraModule() {
     const [permission, requestPermission] = Camera.useCameraPermissions();
     const [mostRecentPhoto, setMostRecentPhoto] = useState<string | null>(null);
     const [exit, setExit] = useState<boolean>(false);
-    const navigation = useNavigation();
+    const navigation = useNavigation<NavType>();
     let camera: ImportedCamera | null;
     const [loading, setLoading] = useState<boolean>(false);
     const animation = useRef(null);
@@ -93,7 +94,6 @@ export default function CameraModule() {
         } else {
             newRockPoolUpdate(photo.uri);
         }
-        newRockPoolUpdate(photo.uri);
         setLoading(false);
     };
 
@@ -123,9 +123,18 @@ export default function CameraModule() {
                 organisms: [],
             };
             console.log(downloadURL);
-            await uploadNewRockPool(request);
+            const newId = await uploadNewRockPool(request);
             setExit(true);
-            navigation.navigate('ResponsePage');
+            if (newId) {
+                navigation.navigate('ResponsePage', {
+                    updateId: newId,
+                    type: 'newPool',
+                });
+            } else {
+                console.log(
+                    'NO NEW ID WAS RETURNED "CameraModule > newRockPool()"'
+                );
+            }
         } catch (error) {
             console.error(error);
         }
@@ -148,9 +157,18 @@ export default function CameraModule() {
                 status: 'unclassified',
             };
             console.log(downloadURL);
-            await uploadNewRockPoolUpdate(request);
+            const newId = await uploadNewRockPoolUpdate(request);
             setExit(true);
-            navigation.navigate('ResponsePage');
+            if (newId) {
+                navigation.navigate('ResponsePage', {
+                    updateId: newId,
+                    type: 'newPoolUpdate',
+                });
+            } else {
+                console.log(
+                    'NO NEW ID WAS RETURNED "CameraModule > newRockPool()"'
+                );
+            }
         } catch (error) {
             console.error(error);
         }
