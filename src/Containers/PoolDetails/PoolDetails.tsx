@@ -10,9 +10,34 @@ import {
     NativeSyntheticEvent,
 } from 'react-native';
 import React, { useState } from 'react';
-import { DetailsContent, DetailTitle, MainImage } from './PoolDetailsElements';
+import {
+    DetailsContent,
+    DetailTitle,
+    IconGroup,
+    LastUpdated,
+    MainImage,
+    PoolSizeIcon,
+    PoolSizeLabel,
+    PoolSizeNumber,
+    PoolSizeWrapper,
+    PoolSizeTextContainer,
+    PlaceholderIcon,
+    PoolDepthLabel,
+    PoolDepthNumber,
+    PoolDepthWrapper,
+    PoolDepthIcon,
+    DownloadIcon,
+    PoolStatWrapper,
+    Stat,
+    StatsRow,
+    StatsTitle,
+} from './PoolDetailsElements';
 import { Card } from 'react-native-shadow-cards';
 import ImageCarousel from './ImageCarousel';
+import {
+    ButtonText,
+    CaptureButton,
+} from '../StatusOverlay/StatusOverlayElements';
 
 const PoolDetails = () => {
     const [images, setImages] = useState<string[]>([
@@ -48,8 +73,52 @@ const PoolDetails = () => {
         >
             <ImageCarousel {...{ images }} />
             <DetailsContent>
+                <LastUpdated>Last Updated: 20/12/2022</LastUpdated>
                 <DetailTitle {...{}}>Spring Fields Rock pool</DetailTitle>
             </DetailsContent>
+            <IconGroup>
+                <PoolSizeWrapper>
+                    <PoolSizeIcon />
+                    <PoolSizeTextContainer>
+                        <PoolSizeLabel>Pool Size</PoolSizeLabel>
+                        <PoolSizeNumber>15 cm</PoolSizeNumber>
+                    </PoolSizeTextContainer>
+                </PoolSizeWrapper>
+                <PoolDepthWrapper>
+                    <PoolDepthIcon />
+                    <PoolSizeTextContainer>
+                        <PoolDepthLabel>Pool Size</PoolDepthLabel>
+                        <PoolDepthNumber>15 cm</PoolDepthNumber>
+                    </PoolSizeTextContainer>
+                </PoolDepthWrapper>
+                <PoolSizeWrapper>
+                    <PlaceholderIcon />
+                </PoolSizeWrapper>
+            </IconGroup>
+            <PoolStatWrapper>
+                <StatsTitle>Pool Stats</StatsTitle>
+                <StatsRow>
+                    <Stat>78% coverage</Stat>
+                    <Stat>36% algae</Stat>
+                </StatsRow>
+
+                <StatsRow>
+                    <Stat>7 barnacles</Stat>
+                    <Stat>3 oysters</Stat>
+                </StatsRow>
+            </PoolStatWrapper>
+            <CaptureButton
+                {...{
+                    style: { position: 'absolute', bottom: 30, width: '90%' },
+                }}
+            >
+                <DownloadIcon />
+                <ButtonText
+                    {...{ style: { fontSize: 20, fontWeight: 'normal' } }}
+                >
+                    Download
+                </ButtonText>
+            </CaptureButton>
         </View>
     );
 };
