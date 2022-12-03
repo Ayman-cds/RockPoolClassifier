@@ -35,8 +35,11 @@ export interface RockPool {
         lat: number;
         lng: number;
     };
-    images: string[];
+    image: string[];
     classifiedImage: string[] | null;
+    poolSize: number;
+    poolDepth: number;
+    lastUpdated: Date;
     status: 'unclassified' | 'classified';
 }
 export interface RockPoolAddition {
@@ -89,27 +92,22 @@ export default function CameraModule() {
         })();
     }, []);
 
-    useEffect(() => {
-        if (!permission) {
-            // Camera permissions are still loading
-            return <View />;
-        }
+    if (!permission) {
+        // Camera permissions are still loading
+        return <View />;
+    }
 
-        if (!permission.granted) {
-            // Camera permissions are not granted yet
-            return (
-                <View>
-                    <Text style={{ textAlign: 'center' }}>
-                        We need your permission to show the camera
-                    </Text>
-                    <Button
-                        onPress={requestPermission}
-                        title="grant permission"
-                    />
-                </View>
-            );
-        }
-    }, []);
+    if (!permission.granted) {
+        // Camera permissions are not granted yet
+        return (
+            <View>
+                <Text style={{ textAlign: 'center' }}>
+                    We need your permission to show the camera
+                </Text>
+                <Button onPress={requestPermission} title="grant permission" />
+            </View>
+        );
+    }
 
     const takePicture = async () => {
         if (!camera) return;

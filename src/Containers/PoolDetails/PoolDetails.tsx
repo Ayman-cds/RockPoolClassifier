@@ -32,12 +32,14 @@ import {
     StatsRow,
     StatsTitle,
 } from './PoolDetailsElements';
-import { Card } from 'react-native-shadow-cards';
 import ImageCarousel from './ImageCarousel';
 import {
     ButtonText,
     CaptureButton,
 } from '../StatusOverlay/StatusOverlayElements';
+import { RockPool } from '../Camera/CameraModule';
+import { RouteProp, useRoute } from '@react-navigation/native';
+import { RootStackParamList } from '../../../App';
 
 const PoolDetails = () => {
     const [images, setImages] = useState<string[]>([
@@ -46,13 +48,13 @@ const PoolDetails = () => {
         'https://firebasestorage.googleapis.com/v0/b/oceanhack-75cd2.appspot.com/o/33daea64-8f0b-40ba-b247-0a25b03873b2.jpg?alt=media&token=4dc9ab16-80fb-4629-89dc-0eceff6771c4',
     ]);
     const [activeSlide, setActiveSlide] = useState(0);
-    const RenderImages = ({ item, index }: { item: string; index: number }) => {
-        return <MainImage {...{ source: { uri: item } }} />;
-    };
     const width = Dimensions.get('window').width;
     const height = Dimensions.get('window').height;
     const [active, setActive] = useState(0);
+    const { params } = useRoute<RouteProp<RootStackParamList, 'PoolDetails'>>();
 
+    console.log('PARAMSSSS ==>>', params);
+    const pool = params;
     const paginate = ({
         nativeEvent,
     }: {
@@ -65,30 +67,35 @@ const PoolDetails = () => {
             setActive(slide);
         }
     };
+    const date = new Date(pool.lastUpdated);
+    const formattedDate = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
+    console.log(formattedDate);
     return (
         <View
             {...{
                 style: { marginTop: 50, width, height },
             }}
         >
-            <ImageCarousel {...{ images }} />
+            <ImageCarousel
+                {...{ images: [...pool.image, pool.classifiedImage] }}
+            />
             <DetailsContent>
-                <LastUpdated>Last Updated: 20/12/2022</LastUpdated>
-                <DetailTitle {...{}}>Spring Fields Rock pool</DetailTitle>
+                <LastUpdated>Last Updated: {formattedDate}</LastUpdated>
+                <DetailTitle {...{}}>{pool.name}</DetailTitle>
             </DetailsContent>
             <IconGroup>
                 <PoolSizeWrapper>
                     <PoolSizeIcon />
                     <PoolSizeTextContainer>
                         <PoolSizeLabel>Pool Size</PoolSizeLabel>
-                        <PoolSizeNumber>15 cm</PoolSizeNumber>
+                        <PoolSizeNumber>{pool.poolSize} cm</PoolSizeNumber>
                     </PoolSizeTextContainer>
                 </PoolSizeWrapper>
                 <PoolDepthWrapper>
                     <PoolDepthIcon />
                     <PoolSizeTextContainer>
-                        <PoolDepthLabel>Pool Size</PoolDepthLabel>
-                        <PoolDepthNumber>15 cm</PoolDepthNumber>
+                        <PoolDepthLabel>Pool Depth</PoolDepthLabel>
+                        <PoolDepthNumber>{pool.poolDepth} cm</PoolDepthNumber>
                     </PoolSizeTextContainer>
                 </PoolDepthWrapper>
                 <PoolSizeWrapper>
@@ -98,13 +105,13 @@ const PoolDetails = () => {
             <PoolStatWrapper>
                 <StatsTitle>Pool Stats</StatsTitle>
                 <StatsRow>
-                    <Stat>78% coverage</Stat>
-                    <Stat>36% algae</Stat>
+                    <Stat>{pool.coverage}% coverage</Stat>
+                    <Stat>{pool.organisms?.algae}% algae</Stat>
                 </StatsRow>
 
                 <StatsRow>
-                    <Stat>7 barnacles</Stat>
-                    <Stat>3 oysters</Stat>
+                    <Stat>{pool.organisms?.barnacles} barnacles</Stat>
+                    <Stat>{pool.organisms?.oysters} oysters</Stat>
                 </StatsRow>
             </PoolStatWrapper>
             <CaptureButton

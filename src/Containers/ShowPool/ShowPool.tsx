@@ -20,6 +20,7 @@ import { useNavigation } from '@react-navigation/native';
 import { NavType } from '../../../App';
 import { RockPool } from '../Camera/CameraModule';
 import { ClassificationImage } from '../RequestProcessed/RequestProcessedElements';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const ShowPool = ({ pool }: { pool: RockPool }) => {
     const navigation = useNavigation<NavType>();
@@ -63,6 +64,14 @@ const ShowPool = ({ pool }: { pool: RockPool }) => {
                     <ButtonText>Update Pool</ButtonText>
                 </UpdatePoolBtn>
             </CaptureButtonWrapper>
+            <TouchableOpacity
+                {...{
+                    onPress: () => navigation.navigate('PoolDetails', pool),
+                    style: {},
+                }}
+            >
+                <Text {...{ style: { color: 'green' } }}>View Details </Text>
+            </TouchableOpacity>
         </StatusContainer>
     );
 };

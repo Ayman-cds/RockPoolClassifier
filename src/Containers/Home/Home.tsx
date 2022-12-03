@@ -95,11 +95,12 @@ const Home = () => {
                     }}
                 >
                     {pools
-                        ? pools.map((pool) => {
+                        ? pools.map((pool, k) => {
                               if (pool.status === 'classified') {
                                   return (
                                       <Marker
                                           {...{
+                                              key: k,
                                               coordinate: {
                                                   latitude: pool.location.lat,
                                                   longitude: pool.location.lng,
@@ -108,8 +109,8 @@ const Home = () => {
                                           }}
                                       />
                                   );
-                              }else{
-                                return null
+                              } else {
+                                  return null;
                               }
                           })
                         : null}

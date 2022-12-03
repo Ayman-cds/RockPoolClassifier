@@ -9,7 +9,7 @@ import {
     createStackNavigator,
     StackNavigationProp,
 } from '@react-navigation/stack';
-import CameraModule from './src/Containers/Camera/CameraModule';
+import CameraModule, { RockPool } from './src/Containers/Camera/CameraModule';
 
 import {
     useFonts,
@@ -48,7 +48,7 @@ export type RootStackParamList = {
         rockPoolId: string | null;
         rockPoolName: string | null;
     };
-    PoolDetails: undefined;
+    PoolDetails: RockPool;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -72,16 +72,17 @@ export default function App() {
             <Stack.Navigator>
                 <Stack.Screen
                     {...{
-                        component: PoolDetails,
-                        name: 'PoolDetails',
-                        options: { headerShown: false },
-                    }}
-                />
-                <Stack.Screen
-                    {...{
                         component: Home,
                         name: 'Home',
                         options: { title: 'Overview', headerShown: false },
+                    }}
+                />
+
+                <Stack.Screen
+                    {...{
+                        component: PoolDetails,
+                        name: 'PoolDetails',
+                        options: { headerShown: false },
                     }}
                 />
                 <Stack.Screen
