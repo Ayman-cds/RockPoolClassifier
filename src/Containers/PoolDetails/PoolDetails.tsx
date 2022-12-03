@@ -68,7 +68,7 @@ const PoolDetails = () => {
     return (
         <View
             {...{
-                style: { marginTop: 50, width, height, borderWidth: 1 },
+                style: { marginTop: 50, width, height },
             }}
         >
             <ImageCarousel {...{ images }} />
