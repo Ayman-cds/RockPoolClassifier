@@ -33,6 +33,7 @@ import {
     Poppins_900Black_Italic,
 } from '@expo-google-fonts/poppins';
 import RequestProcessed from './src/Containers/RequestProcessed/RequestProcessed';
+import PoolDetails from './src/Containers/PoolDetails/PoolDetails';
 
 export type RootStackParamList = {
     Home: undefined;
@@ -47,6 +48,7 @@ export type RootStackParamList = {
         rockPoolId: string | null;
         rockPoolName: string | null;
     };
+    PoolDetails: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -70,8 +72,8 @@ export default function App() {
             <Stack.Navigator>
                 <Stack.Screen
                     {...{
-                        component: RequestProcessed,
-                        name: 'ResponsePage',
+                        component: PoolDetails,
+                        name: 'PoolDetails',
                         options: { headerShown: false },
                     }}
                 />
@@ -87,6 +89,14 @@ export default function App() {
                         component: RockPoolAddition,
                         name: 'RockPoolAddition',
                         options: { title: 'Overview', headerShown: false },
+                    }}
+                />
+
+                <Stack.Screen
+                    {...{
+                        component: RequestProcessed,
+                        name: 'ResponsePage',
+                        options: { headerShown: false },
                     }}
                 />
                 <Stack.Screen

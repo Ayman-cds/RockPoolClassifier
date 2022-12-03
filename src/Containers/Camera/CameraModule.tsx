@@ -35,8 +35,8 @@ export interface RockPool {
         lat: number;
         lng: number;
     };
-    image: string;
-    classifiedImage: string | null;
+    images: string[];
+    classifiedImage: string[] | null;
     status: 'unclassified' | 'classified';
 }
 export interface RockPoolAddition {
