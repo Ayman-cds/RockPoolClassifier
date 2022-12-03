@@ -21,6 +21,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import LottieView from 'lottie-react-native';
 import loadingAnimation from '../../assets/loading.json';
 import { NavType } from '../../../App';
+import * as Location from 'expo-location';
 
 export interface RockPool {
     name: string;
@@ -67,6 +68,26 @@ export default function CameraModule() {
     let camera: ImportedCamera | null;
     const [loading, setLoading] = useState<boolean>(false);
     const animation = useRef(null);
+
+    const [showPool, setShowPool] = useState<RockPool>();
+    const [location, setLocation] = useState(null);
+    const [errorMsg, setErrorMsg] = useState(null);
+
+    useEffect(() => {
+        (async () => {
+            let { status } = await Location.requestForegroundPermissionsAsync();
+            if (status !== 'granted') {
+                setErrorMsg('Permission to access location was denied');
+                return;
+            }
+
+            let location = await Location.getCurrentPositionAsync({});
+            setLocation(location);
+
+            const text = JSON.stringify(location);
+            console.log(text);
+        })();
+    }, []);
 
     useEffect(() => {
         if (!permission) {
@@ -120,8 +141,8 @@ export default function CameraModule() {
             const downloadURL = await getDownloadURL(reference);
             const request: RockPool = {
                 location: {
-                    lat: 0,
-                    lng: 0,
+                    lat: location.coords.latitude,
+                    lng: location.coords.longitude,
                 },
                 image: downloadURL,
                 classifiedImage: null,

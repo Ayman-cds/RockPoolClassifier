@@ -27,17 +27,25 @@ export const StatusContainer = styled(View)`
     flex-direction: column;
     background-color: white;
     border-radius: 20px;
-    height: 40%;
+    height: 50%;
 `;
 export const InfoAndDrone = styled(View)`
     width: 100%;
     display: flex;
     flex-direction: row;
     margin-top: 20px;
-    height: 60%;
+    height: 50%;
 `;
 export const InfoContainer = styled(View)`
-    width: 72%;
+    margin-top: 10px;
+    width: 100%;
+    height: 40%;
+`;
+export const Wrapper = styled(View)`
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
 `;
 
 export const StatusTitle = styled(Text)`
@@ -45,9 +53,11 @@ export const StatusTitle = styled(Text)`
     font-size: 20px;
     font-family: Poppins-Light;
     margin-left: 45px;
+    text-align: center;
 `;
 export const InfoWrapper = styled(View)`
-    margin-top: 20px;
+    height: 100%;
+    width: 40%;
 `;
 export const Info = styled(Text)`
     color: #c0c0c0;
@@ -56,8 +66,12 @@ export const Info = styled(Text)`
     margin-left: 45px;
     margin-top: 8px;
 `;
-export const DroneWrapper = styled(View)`
-    width: 40%;
+export const ImageWrapper = styled(View)`
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
 `;
 export const CaptureButton = styled(TouchableOpacity)`
     width: 85%;
@@ -71,7 +85,9 @@ export const CaptureButton = styled(TouchableOpacity)`
 `;
 
 export const CaptureButtonWrapper = styled(View)`
+    position: absolute;
     width: 100%;
+    bottom: 100px
     flex-direction: row;
     justify-content: space-around;
 `;

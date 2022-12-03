@@ -96,7 +96,6 @@ export default function App() {
                         options: { title: 'Overview', headerShown: false },
                     }}
                 />
-
                 <Stack.Screen
                     {...{
                         component: CameraModule,

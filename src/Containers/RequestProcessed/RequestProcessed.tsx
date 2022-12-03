@@ -82,8 +82,11 @@ const RequestProcessed = () => {
                         </ClassificationTitle>
                         <ClassificationImage
                             {...{
+                                style: {
+                                    height: '50%',
+                                },
                                 source: {
-                                    uri: 'https://firebasestorage.googleapis.com/v0/b/oceanhack-75cd2.appspot.com/o/0573bdfd-2ddb-4282-ad24-1dad41d661c7.jpg?alt=media&token=de7aecf4-cb4b-4c80-a64c-cc8a5e3e45cf',
+                                    uri: data?.classifiedImage || '',
                                 },
                             }}
                         />

@@ -2,12 +2,15 @@ import { StyleSheet } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { HomeMain, Map, MapContainer } from './HomeElements';
 import { Marker } from 'react-native-maps';
-import { setDoc, doc } from 'firebase/firestore';
+import { onSnapshot, collection } from 'firebase/firestore';
 import { db } from '../../../firebase-config';
 import StatusOverlay from '../StatusOverlay/StatusOverlay';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DeliveryStatus from '../DeliveryStatus/DeliveryStatus';
 import { useIsFocused } from '@react-navigation/native';
+import { RockPool } from '../Camera/CameraModule';
+import ShowPool from '../ShowPool/ShowPool';
+import * as Location from 'expo-location';
 
 const Home = () => {
     const [activeTaskId, setActiveTaskId] = useState<null | string>(null);
@@ -41,7 +44,38 @@ const Home = () => {
             console.error(error);
         }
     };
+    const [pools, setPools] = useState<RockPool[]>();
+    useEffect(() => {
+        const unsub = onSnapshot(collection(db, 'RockPool'), (collection) => {
+            const pools = collection.docs.map((snap) => ({ ...snap.data() }));
+            console.log('Current data: ', pools);
+            setPools(pools);
+        });
+    }, []);
 
+    const [showPool, setShowPool] = useState<RockPool>();
+    const [location, setLocation] = useState(null);
+    const [errorMsg, setErrorMsg] = useState(null);
+
+    useEffect(() => {
+        (async () => {
+            let { status } = await Location.requestForegroundPermissionsAsync();
+            if (status !== 'granted') {
+                setErrorMsg('Permission to access location was denied');
+                return;
+            }
+
+            let location = await Location.getCurrentPositionAsync({});
+            setLocation(location);
+        })();
+    }, []);
+
+    let text = 'Waiting..';
+    if (errorMsg) {
+        text = errorMsg;
+    } else if (location) {
+        text = JSON.stringify(location);
+    }
     return (
         <HomeMain
             {...{
@@ -60,35 +94,32 @@ const Home = () => {
                         },
                     }}
                 >
-                    <Marker
-                        {...{
-                            coordinate: {
-                                latitude: 5.395866,
-                                longitude: 100.328082,
-                            },
-                        }}
-                    />
-
-                    <Marker
-                        {...{
-                            coordinate: {
-                                latitude: 5.458444,
-                                longitude: 100.313829,
-                            },
-                        }}
-                    />
-
-                    <Marker
-                        {...{
-                            coordinate: {
-                                latitude: 5.423673,
-                                longitude: 100.336011,
-                            },
-                        }}
-                    />
+                    {pools
+                        ? pools.map((pool) => {
+                              if (pool.status === 'classified') {
+                                  return (
+                                      <Marker
+                                          {...{
+                                              coordinate: {
+                                                  latitude: pool.location.lat,
+                                                  longitude: pool.location.lng,
+                                              },
+                                              onPress: () => setShowPool(pool),
+                                          }}
+                                      />
+                                  );
+                              }else{
+                                return null
+                              }
+                          })
+                        : null}
                 </Map>
             </MapContainer>
-            <StatusOverlay />
+            {showPool ? (
+                <ShowPool {...{ pool: showPool }} />
+            ) : (
+                <StatusOverlay />
+            )}
         </HomeMain>
     );
 };

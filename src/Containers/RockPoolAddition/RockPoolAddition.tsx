@@ -40,8 +40,10 @@ const RockPoolAddition = () => {
         const allRockPools: { label: string; value: string }[] = [];
         docsSnap.docs.forEach((pool) => {
             const poolData = pool.data();
-            const item = { label: poolData.name, value: pool.id };
-            allRockPools.push(item);
+           if (poolData.status === 'classified') {
+               const item = { label: poolData.name, value: pool.id };
+               allRockPools.push(item);
+           }
         });
         setItems(allRockPools);
         console.log(allRockPools);

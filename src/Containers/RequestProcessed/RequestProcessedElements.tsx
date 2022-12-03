@@ -36,8 +36,7 @@ export const ClassificationTitle = styled(Text)`
 export const ClassificationImage = styled(Image)`
     width: 90%;
     border-radius: 20px;
-    height: 50%;
-    margin: 10px;
+    height: 100%;
 `;
 
 export const MiddleTextWrapper = styled(View)`

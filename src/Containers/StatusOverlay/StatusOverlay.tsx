@@ -1,7 +1,7 @@
 import { View, Text } from 'react-native';
 import React from 'react';
 import {
-    DroneWrapper,
+    ImageWrapper,
     Info,
     InfoAndDrone,
     InfoContainer,
@@ -25,18 +25,15 @@ const StatusOverlay = () => {
         <StatusContainer>
             <InfoAndDrone>
                 <InfoContainer>
-                    <StatusTitle>Benthic Marine organisms near you</StatusTitle>
-                    <InfoWrapper>
+                    <StatusTitle>Marine organisms near you</StatusTitle>
+                    {/* <InfoWrapper>
                         <Info {...{ style: { color: 'green' } }}>
                             Straits Quay Penang: 40,000 organisms
                         </Info>
                         <Info>E&O Hotel: 40,000 organisms</Info>
                         <Info>Karpal Singh Drive: 60,000 organisms</Info>
-                    </InfoWrapper>
+                    </InfoWrapper> */}
                 </InfoContainer>
-                <DroneWrapper>
-                    <Drone {...{ droneType: 'package' }} />
-                </DroneWrapper>
             </InfoAndDrone>
             <CaptureButtonWrapper>
                 <NewPoolBtn
