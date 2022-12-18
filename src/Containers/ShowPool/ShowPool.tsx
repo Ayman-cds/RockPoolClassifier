@@ -64,14 +64,14 @@ const ShowPool = ({ pool }: { pool: RockPool }) => {
                     <ButtonText>Update Pool</ButtonText>
                 </UpdatePoolBtn>
             </CaptureButtonWrapper>
-            <TouchableOpacity
+            {/* <TouchableOpacity
                 {...{
                     onPress: () => navigation.navigate('PoolDetails', pool),
-                    style: {},
+                    style: { position: 'absolute', bottom: 100 },
                 }}
             >
                 <Text {...{ style: { color: 'green' } }}>View Details </Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
         </StatusContainer>
     );
 };

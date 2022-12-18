@@ -87,7 +87,7 @@ export const CaptureButton = styled(TouchableOpacity)`
 export const CaptureButtonWrapper = styled(View)`
     position: absolute;
     width: 100%;
-    bottom: 100px
+    bottom: 100px;
     flex-direction: row;
     justify-content: space-around;
 `;
