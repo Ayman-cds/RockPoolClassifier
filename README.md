@@ -33,17 +33,34 @@ To run the app, use the following command:
 
 This will start the React Native development server and you should be able to view the app in a simulator or on your physical device.
 
-![WhatsApp Image 2022-12-18 at 5 26 32 PM](https://user-images.githubusercontent.com/75167679/208292153-6e113312-b1d3-4d03-b058-7de9d7be7ba2.jpeg)
-![update rock pool](https://user-images.githubusercontent.com/75167679/208292218-550aea70-3fad-47db-8983-60878d8a93c8.jpeg)
-![image classified](https://user-images.githubusercontent.com/75167679/208292224-54ca9643-61cc-42a7-a1aa-289507452859.jpeg)
-![details screen](https://user-images.githubusercontent.com/75167679/208292226-ac365d9c-6134-49b5-9247-31e745e9291d.jpeg)
+
+
+## App Screenshots
+
+<table>
+
+  <tr>
+    <td>First Screen Page</td>
+     <td>Rock pool preview</td>
+     <td>Rock pool details screen</td>
+  </tr>
+  <tr>
+    <td><img src="https://user-images.githubusercontent.com/75167679/208292231-a9738ece-e120-4ecf-8d10-c7509da8bd96.jpeg" width=270 ></td>
+    <td><img src="https://user-images.githubusercontent.com/75167679/208292709-2fa8a94d-d6c5-4c0e-a8c7-835f399db4c5.jpeg" width=270 ></td>
+        <td><img src="https://user-images.githubusercontent.com/75167679/208292849-cc841d9e-acf9-4f1b-a55c-15c19d949dbd.jpeg" width=270 ></td>
+  </tr>
+    <tr>
+    <td>Add New Pool</td>
+     <td>Update Rock Pool</td>
+     <td>Image Classified screen</td>
+  </tr>
+  <tr>
+    <td><img src="https://user-images.githubusercontent.com/75167679/208293069-d9af857f-5d22-4471-8d34-668113d81cb3.jpeg" width=270 ></td>
+    <td><img src="https://user-images.githubusercontent.com/75167679/208292966-e71822ae-7255-49a4-98ef-6799007ed7cb.jpeg" width=270 ></td>
+        <td><img src="https://user-images.githubusercontent.com/75167679/208292987-fa80e31b-1891-4b4c-b5fb-37eadc6282f8.jpeg" width=270 ></td>
+  </tr>
+ </table>
 
 
 
-
-
-![first enter](https://user-images.githubusercontent.com/75167679/208292231-a9738ece-e120-4ecf-8d10-c7509da8bd96.jpeg)
-             |  ![details screen](https://user-images.githubusercontent.com/75167679/208292229-d4c6e61d-a12f-455d-933f-c5d376da0bf3.jpeg)
-:-------------------------:|:-------------------------:
-![add new rockpool](https://user-images.githubusercontent.com/75167679/208292216-f663fdcd-b8e0-484c-ad58-75cd85aca1e3.jpeg)  | ![add new rock pool](https://user-images.githubusercontent.com/75167679/208292239-2d7dd894-d54f-4085-9fbf-0c4ec033c344.jpeg)
 
